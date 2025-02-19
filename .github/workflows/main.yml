@@ -1,0 +1,27 @@
+name: Python Automate Workflow
+
+on: 
+  push:
+    branches: [ main ]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    permissions: 
+      contents: write
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Python
+        uses: actions/setup-python@v5.4.0
+        with:
+          python-version : '3.12.1'
+      - name: Run Script
+        run: python automatization.py
+
+      - name: Git Commit and Push
+        uses: stefanzweifel/git-auto-commit-action@v5
+        with:
+          commit_message: Automated Change
+          commit_user_name: Diogo Abregu [bot]
+          commit_user_email: diogo.abregu.g@uni.pe
